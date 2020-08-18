@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rock, Paper, Scissors </title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+<div class="container">
+    <div id="round">Round : <span id="roundCount">0</span></div>
+
+    <div class="input-buttons">
+        <button id="rock" class="button">Rock</button>
+        <button id="paper" class="button">Paper</button>
+        <button id="scissors" class="button">Scissors</button>
+    </div>
+
+    <div id="msgBox"></div>
+
+    <div class="result-box">
+        <div class="box">
+            <span class="score">Player</span>
+            <div  class="score" id="player-result">00</div>
+        </div>
+        <div class="box">
+            <span class="score">Computer</span>
+            <div  class="score" id="computer-result">00</div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+<script>
+function computerPlay(){
+    let inputOptions = ['Rock', 'Paper','Scissors']
+    return inputOptions[Math.floor(Math.random()*3)]
+}
+let computerWinCounter = 0,playerWinCount = 0;rounds = 0
+function playRound(playerSelection, computerSelection) {
+    rounds ++;
+	let player = playerSelection.toLowerCase();
+	let computer = computerSelection.toLowerCase();
+
+    if (player == "rock") {
+        switch(computer){
+            case "paper":
+                computerWinCounter++;
+                return "You lose. Paper beats Rock.";
+                break;
+            case "scissors":
+                playerWinCount++;
+                return "You win. Rock beats scissors.";
+                break;
+            default :
+                return "Draw"
+        }
+    }
+    else if (player == "paper") {
+        switch(computer){
+            case "rock":
+                playerWinCount++;
+                return "You win. Paper beats rock.";
+                break;
+            case "scissors":
+                computerWinCounter++;
+                return "You lose. Scissors beats paper.";
+                break;
+            default :
+                return "Draw"
+        }
+    }
+    else if (player == "scissors") {
+        switch(computer){
+            case "paper":
+                playerWinCount++;
+                return "You win. Scissors beats paper.";
+                break;
+            case "rock":
+                computerWinCounter++;
+                return "You lose. Rock beats scissors.";
+                break
+            default :
+                return "Draw"
+        }
+    }
+    else {
+        return "Invalid option";
+    }
+}
+
+const buttons = document.querySelectorAll('button');
+buttons.forEach(button => button.addEventListener("click", game));
+function game(e){
+    if(rounds >= 10) {
+        let msg = computerWinCounter > playerWinCount ? 'Computer Won! Computer : '+computerWinCounter+' , Player : '+playerWinCount : computerWinCounter < playerWinCount ? 'Player Won! Computer : '+computerWinCounter+' , Player :'+playerWinCount : 'Draw.. Computer : '+computerWinCounter+', Player : '+playerWinCount
+        return alert('Game Over!\n'+msg)
+    }
+    const clickedButton = e.target.classList.add('button-clicked')
+    const playerSelection = e.target.id
+    const computerSelection = computerPlay()
+    const result = playRound(playerSelection,computerSelection)
+
+    const msgBox = document.getElementById('msgBox')
+    const playerScore = document.getElementById('player-result')
+    const computerScore = document.getElementById('computer-result')
+    const roundCount = document.getElementById('roundCount')
+
+    msgBox.textContent = result
+    playerScore.textContent = ("0"+playerWinCount).slice(-2)
+    computerScore.textContent = ("0"+computerWinCounter).slice(-2)
+    roundCount.textContent = rounds
+}
+
+const keys = Array.from(document.querySelectorAll('.key'));
+keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+
+function removeTransition(e) {
+    if (e.propertyName !== 'transform') return;
+    e.target.classList.remove('button-clicked');
+}
+
+</script>

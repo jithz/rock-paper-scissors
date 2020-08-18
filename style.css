@@ -1,0 +1,56 @@
+html {
+    font-size: 10px;
+    background-size: cover;
+}
+
+body,html {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+.container{
+    min-height: 100vh;
+    margin-top: 30vh;
+}
+.button{
+    width: 20rem;
+    height: 5rem;
+    font-size: 2rem;
+    border: 0.5rem solid gray;
+    margin: 1rem;
+    color: dimgray;
+    font-weight: bold;
+    text-shadow:  0 0 0.2rem springgreen;
+    text-align: center;
+    cursor: pointer;
+}
+.button-clicked{
+    transform: scale(1.1);
+    border-color: gold;
+    box-shadow: 0 0 1rem #ffc600;
+}
+.input-buttons, .result-box{
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    height: 15vh;
+}
+.result-box .box{
+    width: 15vh;
+    margin: 1vh;
+    padding: 2vh;
+    text-align: center;
+    background-color: white;
+    color: red;
+    border: 2px solid gold;
+}
+.score{
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 1vh;
+}
+#msgBox,#round{
+    color: gold;
+    text-align: center;
+    font-size: 2rem;
+}
